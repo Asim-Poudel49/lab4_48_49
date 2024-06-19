@@ -56,7 +56,7 @@ void calculateTimeComplexity(int arr[], int size) {
 
 // Driver code
 int main() {
-    int arr[] = { 64, 25, 12, 22, 11 };
+    int arr[] = { 64, 25, 12, 22, 11,55, 33, 44, 66, 77, 88, 99, 100};
     int n = sizeof(arr) / sizeof(arr[0]);
 
     cout << "Original array: ";
