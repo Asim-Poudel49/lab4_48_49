@@ -1,21 +1,24 @@
+#include "./QuickSort.h"
 #include <iostream>
-#include <chrono> // For measuring time
+#include <chrono>
 using namespace std;
 
-// Function to swap two elements
-void swap(int* a, int* b) {
+void swap(int *a, int *b)
+{
     int temp = *a;
     *a = *b;
     *b = temp;
 }
 
-// Function to partition the array
-int partition(int arr[], int low, int high) {
+int partition(int arr[], int low, int high)
+{
     int pivot = arr[high];
     int i = (low - 1);
 
-    for (int j = low; j <= high - 1; j++) {
-        if (arr[j] < pivot) {
+    for (int j = low; j <= high - 1; j++)
+    {
+        if (arr[j] < pivot)
+        {
             i++;
             swap(&arr[i], &arr[j]);
         }
@@ -24,9 +27,10 @@ int partition(int arr[], int low, int high) {
     return (i + 1);
 }
 
-// Function to implement QuickSort
-void quickSort(int arr[], int low, int high) {
-    if (low < high) {
+void quickSort(int arr[], int low, int high)
+{
+    if (low < high)
+    {
         int pi = partition(arr, low, high);
 
         quickSort(arr, low, pi - 1);
@@ -34,38 +38,44 @@ void quickSort(int arr[], int low, int high) {
     }
 }
 
-// Function to print the array
-void printArray(int arr[], int size) {
-    for (int i = 0; i < size; i++) {
+void printArray(int arr[], int size)
+{
+    for (int i = 0; i < size; i++)
+    {
         cout << arr[i] << " ";
     }
     cout << endl;
 }
 
-// Function to calculate the time complexity of QuickSort
-void calculateTimeComplexity(int arr[], int size) {
-    auto start = chrono::high_resolution_clock::now(); // Start measuring time
+void calculateTimeComplexity(int arr[], int size, int runs)
+{
+    int *original = new int[size];
+    for (int i = 0; i < size; i++)
+    {
+        original[i] = arr[i];
+    }
 
-    quickSort(arr, 0, size - 1);
+    long long totalDuration = 0;
 
-    auto end = chrono::high_resolution_clock::now(); // Stop measuring time
-    auto duration = chrono::duration_cast<chrono::microseconds>(end - start); // Calculate the duration in microseconds
+    for (int i = 0; i < runs; i++)
+    {
+        // Reset array to original state
+        for (int j = 0; j < size; j++)
+        {
+            arr[j] = original[j];
+        }
 
-    cout << "Time Complexity of QuickSort: " << duration.count() << " microseconds" << endl;
-}
+        auto start = chrono::high_resolution_clock::now();
 
-// Driver code
-int main() {
-    int arr[] = { 64, 25, 12, 22, 11 };
-    int n = sizeof(arr) / sizeof(arr[0]);
+        quickSort(arr, 0, size - 1);
 
-    cout << "Original array: ";
-    printArray(arr, n);
+        auto end = chrono::high_resolution_clock::now();
+        auto duration = chrono::duration_cast<chrono::microseconds>(end - start);
 
-    calculateTimeComplexity(arr, n);
+        totalDuration += duration.count();
+    }
 
-    cout << "Sorted array: ";
-    printArray(arr, n);
+    cout << "Average Time Complexity of QuickSort over " << runs << " runs: " << totalDuration / runs << " microseconds" << endl;
 
-    return 0;
+    delete[] original;
 }
