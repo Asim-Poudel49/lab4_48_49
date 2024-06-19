@@ -52,7 +52,8 @@ int main(){
     for(int i = 0; i < n; i++) {
          arr[i]= dis(gen);
     }
-
+    cout<<"For insertion sort: \n ";
+    cout <<"total elements: "<< n << "\n";
     //cout << "Original array: ";
     //printArray(arr, n);
     calculateTimeComplexity(arr, n);
