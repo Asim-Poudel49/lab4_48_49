@@ -75,7 +75,7 @@ void calculateTimeComplexity(int arr[], int size, int runs)
         totalDuration += duration.count();
     }
 
-    cout << "Average Time Complexity of QuickSort over " << runs << " runs: " << totalDuration / runs << " microseconds" << endl;
+    cout << "Time Complexity of QuickSort is  " << totalDuration / runs << " microseconds" << endl;
 
     delete[] original;
 }

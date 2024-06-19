@@ -1,5 +1,7 @@
 #include "./QuickSort.h"
 #include <iostream>
+#include <chrono>
+#include <algorithm>
 #include <random>
 using namespace std;
 
@@ -18,8 +20,10 @@ int main()
         arr[i] = dis(gen);
     }
 
-    cout << "Original array: ";
-    printArray(arr, n);
+    // cout << "Original array: ";
+    // printArray(arr, n);
+
+    std::sort(arr, arr + n);
 
     calculateTimeComplexity(arr, n, runs);
 
