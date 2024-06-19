@@ -42,29 +42,31 @@ void calculateTimeComplexity(int arr[], int n) {
 
 int main(){
     int n;
-    cout << "Enter the number of elements: ";
-    cin >> n;
-    int arr[n],revArr[n];
-     random_device rd;
-     mt19937 gen(rd());
-     uniform_int_distribution<> dis(0, 999);
+    n = 100000;
+    int *arr = new int[n];
+    int *revArr = new int[n];
+
+    random_device rd;
+    mt19937 gen(rd());
+    uniform_int_distribution<> dis(0, 99999);
     for(int i = 0; i < n; i++) {
          arr[i]= dis(gen);
     }
-    cout << "Original array: ";
-    printArray(arr, n);
-
-    cout << "Sorted array: ";
-    printArray(arr, n);
+    cout<<"For insertion sort: \n ";
+    cout <<"total elements: "<< n << "\n";
+    //cout << "Original array: ";
+    //printArray(arr, n);
+    calculateTimeComplexity(arr, n);
+    //cout << "Sorted array: ";
+    //printArray(arr, n);
     
     for(int i = 0; i < n; i++) {
-         revArr[n-i-1]=arr[i];
+         revArr[i]=arr[n-1-i];
     }
-
     calculateTimeComplexity(arr, n);
+    //cout << "Reversed array: ";
+    //printArray(revArr, n);
     calculateTimeComplexity(revArr, n);
-   
-
     return 0;
 
 
